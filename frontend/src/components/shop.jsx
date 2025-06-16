@@ -1,4 +1,5 @@
 import Layout from './common/Layout';
+
 const shop = () => {
   return (
     <Layout>
