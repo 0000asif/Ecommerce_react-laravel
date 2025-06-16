@@ -1,9 +1,16 @@
 import Layout from './common/Layout';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Thumbs, FreeMode, Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
+import { useState } from 'react';
 
-const Shop = () => {
+const Product = () => {
   const productpriceclass =
     'mb-2text-lg font-semibold hover:text-soft_blue transition-all duration-300 ease-in-out';
-
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
   return (
     <Layout>
       <div className="py-5">
@@ -36,53 +43,96 @@ const Shop = () => {
                       d="m1 9 4-4-4-4"
                     />
                   </svg>
-                  <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
+                  <a
+                    href="#"
+                    class="inline-flex items-center text-sm font-medium text-gray-700  dark:text-gray-400 "
+                  >
                     Shop
+                  </a>
+                </div>
+              </li>
+
+              <li aria-current="page">
+                <div class="flex items-center">
+                  <svg
+                    class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 6 10"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m1 9 4-4-4-4"
+                    />
+                  </svg>
+                  <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
+                    Product Details
                   </span>
                 </div>
               </li>
             </ol>
           </nav>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-            <div className="md:col-span-4 bg-blue-100 p-4">
-              <div className="shadow-lg p-6">
-                <h3 className="text-xl font-bold pb-2">Categories</h3>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-2">
+            <div className="md:col-span-5 bg-blue-100 p-4">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-2">
+                <div className="col-span-2 border">
+                  <Swiper
+                    style={{
+                      '--swiper-navigation-color': '#000',
+                      '--swiper-pagination-color': '#000',
+                    }}
+                    onSwiper={setThumbsSwiper}
+                    loop={true}
+                    direction={`vertical`}
+                    spaceBetween={10}
+                    slidesPerView={6}
+                    freeMode={true}
+                    watchSlidesProgress={true}
+                    modules={[FreeMode, Navigation, Thumbs]}
+                    className="mySwiper mt-2"
+                  >
+                    <SwiperSlide>
+                      <div className="content">
+                        <img
+                          src="/four.jpg"
+                          alt=""
+                          height={100}
+                          className="w-100"
+                        />
+                      </div>
+                    </SwiperSlide>
+                  </Swiper>
+                </div>
 
-                <ul className="space-y-2">
-                  <li>
-                    <input type="checkbox" /> {'Men'}
-                  </li>
-                  <li>
-                    <input type="checkbox" /> {'Woman'}
-                  </li>
-                  <li>
-                    <input type="checkbox" /> {'Kids'}
-                  </li>
-                </ul>
-              </div>
-
-              <div className="shadow-lg p-6">
-                <h3 className="text-xl font-bold pb-2">Brands</h3>
-
-                <ul className="space-y-2">
-                  <li>
-                    <input type="checkbox" /> {'Puma'}
-                  </li>
-                  <li>
-                    <input type="checkbox" /> {'Apex'}
-                  </li>
-                  <li>
-                    <input type="checkbox" /> {'Bata'}
-                  </li>
-                  <li>
-                    <input type="checkbox" /> {'Levis'}
-                  </li>
-                </ul>
+                <div className="col-span-10 border">
+                  <Swiper
+                    style={{
+                      '--swiper-navigation-color': '#000',
+                      '--swiper-pagination-color': '#000',
+                    }}
+                    loop={true}
+                    spaceBetween={0}
+                    navigation={true}
+                    thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
+                    modules={[FreeMode, Navigation, Thumbs]}
+                    className="mySwiper2"
+                  >
+                    <SwiperSlide>
+                      <div className="content">
+                        <img src="/nine.jpg" alt="" className="w-100" />
+                      </div>
+                    </SwiperSlide>
+                  </Swiper>
+                </div>
               </div>
             </div>
 
-            <div className="md:col-span-8 p-4">
+            <div className="md:col-span-7 p-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:md:grid-cols-3  gap-4">
                 <div className="bg-white shadow-md rounded-lg relative overflow-hidden">
                   <div className="overflow-hidden">
@@ -294,4 +344,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default Product;
