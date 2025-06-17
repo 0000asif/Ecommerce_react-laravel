@@ -1,24 +1,27 @@
 import Layout from './common/Layout';
-const shop = () => {
+const Shop = () => {
+  const productpriceclass =
+    'mb-2text-lg font-semibold hover:text-soft_blue transition-all duration-300 ease-in-out';
+
   return (
     <Layout>
       <div className="py-5">
         <div className="max-w-7xl mx-auto px-4">
-          <nav class="flex p-5" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-              <li class="inline-flex items-center">
+          <nav className="flex p-5" aria-label="Breadcrumb">
+            <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+              <li className="inline-flex items-center">
                 <a
                   href="#"
-                  class="inline-flex items-center text-sm font-medium text-gray-700  dark:text-gray-400 "
+                  className="inline-flex items-center text-sm font-medium text-gray-700  dark:text-gray-400 "
                 >
                   Home
                 </a>
               </li>
 
               <li aria-current="page">
-                <div class="flex items-center">
+                <div className="flex items-center">
                   <svg
-                    class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
+                    className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -32,7 +35,7 @@ const shop = () => {
                       d="m1 9 4-4-4-4"
                     />
                   </svg>
-                  <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
+                  <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
                     Shop
                   </span>
                 </div>

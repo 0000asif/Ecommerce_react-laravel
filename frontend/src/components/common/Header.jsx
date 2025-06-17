@@ -80,7 +80,7 @@ const Header = () => {
               </a>
             </li>
             <li className={navLinkClass}>
-              <a href="#">
+              <a href="/cart">
                 <MdOutlineShoppingBag size={20} />
               </a>
             </li>
