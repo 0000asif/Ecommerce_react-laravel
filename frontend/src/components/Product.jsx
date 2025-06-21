@@ -1,35 +1,74 @@
 import Layout from './common/Layout';
+
+import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Thumbs, FreeMode, Navigation } from 'swiper/modules';
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-import { useState } from 'react';
 
 const Product = () => {
-  const productpriceclass =
-    'mb-2text-lg font-semibold hover:text-soft_blue transition-all duration-300 ease-in-out';
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [rating, setRating] = useState(4);
+  const [activeTab, setActiveTab] = useState('profile');
+
+  const tabList = [
+    { key: 'home', label: 'Description', disabled: false },
+    { key: 'profile', label: 'Reviews (50)', disabled: false },
+  ];
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'home':
+        return (
+          <p>
+            100% Original Products <br />
+            Pay on Delivery might be avilable <br />
+            Easy 15 days returns and exchanges
+          </p>
+        );
+      case 'profile':
+        return <p>Tab content for Profile</p>;
+      case 'contact':
+        return <p>Tab content for Contact</p>;
+      default:
+        return null;
+    }
+  };
+
+  const handleRating = rate => {
+    setRating(rate);
+  };
+  const images = [
+    '/two.jpg',
+    '/three.jpg',
+    '/four.jpg',
+    '/five.jpg',
+    '/six.jpg',
+    '/seven.jpg',
+    '/eight.jpg',
+    '/nine.jpg',
+  ];
   return (
     <Layout>
       <div className="py-5">
         <div className="max-w-7xl mx-auto px-4">
-          <nav class="flex p-5" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-              <li class="inline-flex items-center">
+          <nav className="flex p-5" aria-label="Breadcrumb">
+            <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+              <li className="inline-flex items-center">
                 <a
                   href="#"
-                  class="inline-flex items-center text-sm font-medium text-gray-700  dark:text-gray-400 "
+                  className="inline-flex items-center text-sm font-medium text-gray-700  dark:text-gray-400 "
                 >
                   Home
                 </a>
               </li>
 
               <li aria-current="page">
-                <div class="flex items-center">
+                <div className="flex items-center">
                   <svg
-                    class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
+                    className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -45,7 +84,7 @@ const Product = () => {
                   </svg>
                   <a
                     href="#"
-                    class="inline-flex items-center text-sm font-medium text-gray-700  dark:text-gray-400 "
+                    className="inline-flex items-center text-sm font-medium text-gray-700  dark:text-gray-400 "
                   >
                     Shop
                   </a>
@@ -53,9 +92,9 @@ const Product = () => {
               </li>
 
               <li aria-current="page">
-                <div class="flex items-center">
+                <div className="flex items-center">
                   <svg
-                    class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
+                    className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -69,7 +108,7 @@ const Product = () => {
                       d="m1 9 4-4-4-4"
                     />
                   </svg>
-                  <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
+                  <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
                     Product Details
                   </span>
                 </div>
@@ -77,265 +116,143 @@ const Product = () => {
             </ol>
           </nav>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-2 min-h-[750px]">
             <div className="md:col-span-5 bg-blue-100 p-4">
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-2">
-                <div className="col-span-2 border">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-4 h-[600px]">
+                {/* Thumbnail Swiper */}
+                <div className="col-span-2 h-full overflow-hidden">
                   <Swiper
-                    style={{
-                      '--swiper-navigation-color': '#000',
-                      '--swiper-pagination-color': '#000',
-                    }}
                     onSwiper={setThumbsSwiper}
-                    loop={true}
-                    direction={`vertical`}
-                    spaceBetween={10}
+                    direction="vertical"
                     slidesPerView={6}
+                    spaceBetween={10}
                     freeMode={true}
                     watchSlidesProgress={true}
+                    loop={true}
                     modules={[FreeMode, Navigation, Thumbs]}
-                    className="mySwiper mt-2"
+                    className="h-full"
                   >
-                    <SwiperSlide>
-                      <div className="content">
+                    {images.map((src, i) => (
+                      <SwiperSlide key={i}>
                         <img
-                          src="/four.jpg"
-                          alt=""
-                          height={100}
-                          className="w-100"
+                          src={src}
+                          alt={`thumb-${i}`}
+                          className="w-full object-cover rounded"
                         />
-                      </div>
-                    </SwiperSlide>
+                      </SwiperSlide>
+                    ))}
                   </Swiper>
                 </div>
 
-                <div className="col-span-10 border">
+                {/* Main Swiper */}
+                <div className="col-span-10  h-full">
                   <Swiper
-                    style={{
-                      '--swiper-navigation-color': '#000',
-                      '--swiper-pagination-color': '#000',
-                    }}
                     loop={true}
-                    spaceBetween={0}
+                    spaceBetween={10}
                     navigation={true}
-                    thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
+                    thumbs={{ swiper: thumbsSwiper }}
                     modules={[FreeMode, Navigation, Thumbs]}
-                    className="mySwiper2"
+                    className="h-full"
                   >
-                    <SwiperSlide>
-                      <div className="content">
-                        <img src="/nine.jpg" alt="" className="w-100" />
-                      </div>
-                    </SwiperSlide>
+                    {images.map((src, i) => (
+                      <SwiperSlide key={i}>
+                        <img
+                          src={src}
+                          alt={`main-${i}`}
+                          className="w-full h-full object-contain"
+                        />
+                      </SwiperSlide>
+                    ))}
                   </Swiper>
                 </div>
               </div>
             </div>
 
             <div className="md:col-span-7 p-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:md:grid-cols-3  gap-4">
-                <div className="bg-white shadow-md rounded-lg relative overflow-hidden">
-                  <div className="overflow-hidden">
-                    <img
-                      src="/five.jpg"
-                      alt="Card 1"
-                      className="w-full h-[400px] object-cover transform transition duration-300 ease-in-out hover:scale-110"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <a className={productpriceclass} href="/">
-                      Black Jacket for Men
-                    </a>
-                    <p className="text-black-600">
-                      50$
-                      <span className="line-through text-gray-500 ml-2">
-                        60$
-                      </span>
-                    </p>
-                  </div>
-                </div>
-
-                <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                  <div className="overflow-hidden">
-                    <img
-                      src="/two.jpg"
-                      alt="Card 1"
-                      className="w-full h-[400px] object-cover transform transition duration-300 ease-in-out hover:scale-110"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <a className={productpriceclass} href="/">
-                      Blazer for a Young Man for best Attraction best collection
-                    </a>
-                    <p className="text-black-600">
-                      50$
-                      <span className="line-through text-gray-500 ml-2">
-                        60$
-                      </span>
-                    </p>
-                  </div>
-                </div>
-                <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                  <div className="overflow-hidden">
-                    <img
-                      src="/three.jpg"
-                      alt="Card 1"
-                      className="w-full h-[400px] object-cover transform transition duration-300 ease-in-out hover:scale-110"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <a className={productpriceclass} href="/">
-                      Blue Shirt for only Handsome man Men
-                    </a>
-                    <p className="text-black-600">
-                      50$
-                      <span className="line-through text-gray-500 ml-2">
-                        60$
-                      </span>
-                    </p>
-                  </div>
-                </div>
-                <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                  <div className="overflow-hidden">
-                    <img
-                      src="/four.jpg"
-                      alt="Card 1"
-                      className="w-full h-[400px] object-cover transform transition duration-300 ease-in-out hover:scale-110"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <a className={productpriceclass} href="/">
-                      Stylist Goal gola jama blue not fully
-                    </a>
-                    <p className="text-black-600">
-                      50$
-                      <span className="line-through text-gray-500 ml-2">
-                        60$
-                      </span>
-                    </p>
-                  </div>
-                </div>
-                <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                  <div className="overflow-hidden">
-                    <img
-                      src="/five.jpg"
-                      alt="Card 1"
-                      className="w-full h-[400px] object-cover transform transition duration-300 ease-in-out hover:scale-110"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <a className={productpriceclass} href="/">
-                      Black Jacket for Men
-                    </a>
-                    <p className="text-black-600">
-                      50$
-                      <span className="line-through text-gray-500 ml-2">
-                        60$
-                      </span>
-                    </p>
-                  </div>
-                </div>
-                <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                  <div className="overflow-hidden">
-                    <img
-                      src="/six.jpg"
-                      alt="Card 1"
-                      className="w-full h-[400px] object-cover transform transition duration-300 ease-in-out hover:scale-110"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <a className={productpriceclass} href="/">
-                      White t-shirt akdom fola mal
-                    </a>
-                    <p className="text-black-600">
-                      50$
-                      <span className="line-through text-gray-500 ml-2">
-                        60$
-                      </span>
-                    </p>
-                  </div>
-                </div>
-                <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                  <div className="overflow-hidden">
-                    <img
-                      src="/seven.jpg"
-                      alt="Card 1"
-                      className="w-full h-[400px] object-cover transform transition duration-300 ease-in-out hover:scale-110"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <a className={productpriceclass} href="/">
-                      Tay son for Men
-                    </a>
-                    <p className="text-black-600">
-                      50$
-                      <span className="line-through text-gray-500 ml-2">
-                        60$
-                      </span>
-                    </p>
-                  </div>
-                </div>
-                <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                  <div className="overflow-hidden">
-                    <img
-                      src="/eight.jpg"
-                      alt="Card 1"
-                      className="w-full h-[400px] object-cover transform transition duration-300 ease-in-out hover:scale-110"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <a className={productpriceclass} href="/">
-                      This is a blue ray into here for Men
-                    </a>
-                    <p className="text-black-600">
-                      50$
-                      <span className="line-through text-gray-500 ml-2">
-                        60$
-                      </span>
-                    </p>
-                  </div>
-                </div>
-                <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                  <div className="overflow-hidden">
-                    <img
-                      src="/ten.jpg"
-                      alt="Card 1"
-                      className="w-full h-[400px] object-cover transform transition duration-300 ease-in-out hover:scale-110"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <a className={productpriceclass} href="/">
-                      Blue check shirt in brand new
-                    </a>
-                    <p className="text-black-600">
-                      50$
-                      <span className="line-through text-gray-500 ml-2">
-                        60$
-                      </span>
-                    </p>
-                  </div>
-                </div>
-                <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                  <div className="overflow-hidden">
-                    <img
-                      src="/nine.jpg"
-                      alt="Card 1"
-                      className="w-full h-[400px] object-cover transform transition duration-300 ease-in-out hover:scale-110"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <a className={productpriceclass} href="/">
-                      Stylist Men Shit and this watch here
-                    </a>
-                    <p className="text-black-600">
-                      50$
-                      <span className="line-through text-gray-500 ml-2">
-                        60$
-                      </span>
-                    </p>
-                  </div>
+              <h2 className="text-3xl font-bold py-3">
+                Brand New T-shirt from gulisthan
+              </h2>
+              <div className="flex items-center space-x-1">
+                {[1, 2, 3, 4, 5].map(star => (
+                  <span
+                    size={20}
+                    key={star}
+                    onClick={() => setRating(star)}
+                    className={`text-2xl cursor-pointer ${
+                      star <= rating ? 'text-yellow-400' : 'text-gray-300'
+                    }`}
+                  >
+                    ★
+                  </span>
+                ))}
+                <span className="pt-1 ps-2 text-md text-gray-700">
+                  10 Reviews
+                </span>
+              </div>
+              <div className="price font-bold text-2xl py-3">
+                $20 <span className="line-through text-gray-400">$25</span>
+              </div>
+              <div>
+                100% Original Products <br />
+                Pay on Delivery might be avilable <br />
+                Easy 15 days returns and exchanges
+              </div>
+              <div className=" py-3">
+                <strong>Select Size</strong>
+                <div className="flex gap-2 pt-3">
+                  <button className="px-3 py-2 rounded-md bg-gray-100 hover:bg-gray-400 active:bg-gray-400">
+                    L
+                  </button>
+                  <button className="px-3 py-2 rounded-md bg-gray-100 hover:bg-gray-400 active:bg-gray-400">
+                    M
+                  </button>
+                  <button className="px-3 py-2 rounded-md bg-gray-100 hover:bg-gray-400 active:bg-gray-400">
+                    S
+                  </button>
+                  <button className="px-3 py-2 rounded-md bg-gray-100 hover:bg-gray-400 active:bg-gray-400">
+                    XL
+                  </button>
                 </div>
               </div>
+              <div className="add-to-cart py-4 mb-6">
+                <a
+                  href="/cart"
+                  className="uppercase bg-soft_blue rounded-lg py-2 px-8 text-md text-white"
+                >
+                  {' '}
+                  Add to cart{' '}
+                </a>
+              </div>
+              <hr />
+              <div className="sku py-4">
+                <strong>
+                  SKU: <span className="text-gray-500">FFGGG2</span>
+                </strong>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-2 pb-8">
+            <div className="p-4 md:col-span-12">
+              <div className="flex border-b mb-4">
+                {tabList.map(tab => (
+                  <button
+                    key={tab.key}
+                    onClick={() => !tab.disabled && setActiveTab(tab.key)}
+                    className={`py-2 px-4 text-sm font-medium border-b-2 transition-all duration-200
+                    ${
+                      activeTab === tab.key
+                        ? 'border-blue-500 text-blue-600'
+                        : 'border-transparent text-gray-500 hover:text-blue-500'
+                    } `}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Tab Content */}
+              <div className="py-4 bg-white">{renderContent()}</div>
             </div>
           </div>
         </div>
