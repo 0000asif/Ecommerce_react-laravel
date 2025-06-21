@@ -1,5 +1,8 @@
 import Layout from './common/Layout';
-const shop = () => {
+const Shop = () => {
+  const productpriceclass =
+    'mb-2text-lg font-semibold hover:text-soft_blue transition-all duration-300 ease-in-out';
+
   return (
     <Layout>
       <div className="py-5">
