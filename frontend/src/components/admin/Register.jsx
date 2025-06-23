@@ -1,46 +1,6 @@
-import { apiURL } from '../common/https';
 import Layout from './../common/Layout';
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
-  const navigate = useNavigate();
-
-  const onSubmit = async data => {
-    console.log(data);
-
-    const res = await fetch(`${apiURL}/admin/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    const result = await res.json();
-    console.log(result);
-
-    if (result.status === 200) {
-      const adminInfo = {
-        token: result.token,
-        id: result.id,
-        name: result.name,
-      };
-      localStorage.setItem('adminInfo', JSON.stringify(adminInfo));
-      navigate('/admin/dashboard');
-    } else {
-      toast.error(result.message);
-    }
-  };
-
+const Register = () => {
   return (
     <Layout>
       <div className="py-5">
@@ -74,7 +34,7 @@ const Login = () => {
                     />
                   </svg>
                   <span className="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">
-                    Login
+                    Register
                   </span>
                 </div>
               </li>
@@ -88,12 +48,12 @@ const Login = () => {
                 className="mx-auto h-10 w-auto"
               />
               <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-                Sign in to your account
+                Register Now
               </h2>
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              <form action="#" method="POST" className="space-y-6">
                 <div>
                   <label
                     htmlFor="email"
@@ -106,15 +66,10 @@ const Login = () => {
                       id="email"
                       name="email"
                       type="email"
-                      {...register('email', {
-                        required: 'The Email Feild is Required',
-                      })}
+                      required
                       autoComplete="email"
                       className="block w-full rounded-md border bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                     />
-                    {errors.email && (
-                      <p className="text-red-500">{errors.email.message}</p>
-                    )}
                   </div>
                 </div>
 
@@ -126,29 +81,16 @@ const Login = () => {
                     >
                       Password
                     </label>
-                    <div className="text-sm">
-                      <a
-                        href="#"
-                        className="font-semibold  text-indigo-600 hover:text-indigo-500"
-                      >
-                        Forgot password?
-                      </a>
-                    </div>
                   </div>
                   <div className="mt-2">
                     <input
                       id="password"
                       name="password"
                       type="password"
-                      {...register('password', {
-                        required: 'The Password Feild is Required',
-                      })}
+                      required
                       autoComplete="current-password"
                       className="block border w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                     />
-                    {errors.password && (
-                      <p className="text-red-500">{errors.password.message}</p>
-                    )}
                   </div>
                 </div>
 
@@ -157,18 +99,18 @@ const Login = () => {
                     type="submit"
                     className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
-                    Sign in
+                    Register Now
                   </button>
                 </div>
               </form>
 
               <p className="mt-10 text-center text-sm/6 text-gray-500">
-                Not a member?{' '}
+                Already a member?{' '}
                 <a
-                  href="/admin/register"
+                  href="/admin/login"
                   className="font-semibold text-indigo-600 hover:text-indigo-500"
                 >
-                  Register Now
+                  Login
                 </a>
               </p>
             </div>
@@ -179,4 +121,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
