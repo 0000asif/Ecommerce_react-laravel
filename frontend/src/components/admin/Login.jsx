@@ -14,30 +14,59 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  // const onSubmit = async data => {
+  //   console.log(data);
+
+  //   const res = await fetch(`${apiURL}/admin/login`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(data),
+  //   });
+
+  //   const result = await res.json();
+  //   console.log(result);
+
+  //   if (result.status === 200) {
+  //     const adminInfo = {
+  //       token: result.token,
+  //       id: result.id,
+  //       name: result.name,
+  //     };
+  //     localStorage.setItem('adminInfo', JSON.stringify(adminInfo));
+  //     navigate('/admin/dashboard');
+  //   } else {
+  //     toast.error(result.message);
+  //   }
+  // };
+
   const onSubmit = async data => {
-    console.log(data);
+    try {
+      const res = await fetch(`${apiURL}/admin/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-    const res = await fetch(`${apiURL}/admin/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+      const result = await res.json();
 
-    const result = await res.json();
-    console.log(result);
-
-    if (result.status === 200) {
-      const adminInfo = {
-        token: result.token,
-        id: result.id,
-        name: result.name,
-      };
-      localStorage.setItem('adminInfo', JSON.stringify(adminInfo));
-      navigate('/admin/dashboard');
-    } else {
-      toast.error(result.message);
+      if (res.ok && result.token) {
+        const adminInfo = {
+          token: result.token,
+          id: result.id,
+          name: result.name,
+        };
+        localStorage.setItem('adminInfo', JSON.stringify(adminInfo));
+        navigate('/admin/dashboard');
+      } else {
+        toast.error(result.message || 'Login failed');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      toast.error('Network error. Please try again later.');
     }
   };
 

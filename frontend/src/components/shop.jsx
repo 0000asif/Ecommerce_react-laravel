@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Layout from './common/Layout';
 const Shop = () => {
   const productpriceclass =
@@ -92,9 +93,9 @@ const Shop = () => {
                     />
                   </div>
                   <div className="p-4">
-                    <a className={productpriceclass} href="/">
+                    <Link to="/product" className={productpriceclass}>
                       Black Jacket for Men
-                    </a>
+                    </Link>
                     <p className="text-black-600">
                       50$
                       <span className="line-through text-gray-500 ml-2">

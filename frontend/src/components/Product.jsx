@@ -8,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
+import { Link } from 'react-router-dom';
 
 const Product = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -215,13 +216,13 @@ const Product = () => {
                 </div>
               </div>
               <div className="add-to-cart py-4 mb-6">
-                <a
-                  href="/cart"
+                <Link
+                  to="/cart"
                   className="uppercase bg-soft_blue rounded-lg py-2 px-8 text-md text-white"
                 >
                   {' '}
                   Add to cart{' '}
-                </a>
+                </Link>
               </div>
               <hr />
               <div className="sku py-4">

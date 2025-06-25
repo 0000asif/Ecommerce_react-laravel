@@ -2,6 +2,7 @@ import { HiMenu, HiX } from 'react-icons/hi';
 import { MdOutlineShoppingBag } from 'react-icons/md';
 import { CiUser } from 'react-icons/ci';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const navLinkClass =
@@ -49,9 +50,9 @@ const Header = () => {
       </nav> */}
       <div className=" bg-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          <a href="/">
+          <Link to="/">
             <img src="/logo.png" alt="logo" className="h-8" />
-          </a>
+          </Link>
 
           {/* Hamburger Icon (mobile) */}
           <div className="md:hidden">
@@ -63,26 +64,26 @@ const Header = () => {
           {/* Desktop Menu */}
           <ul className="hidden md:flex space-x-6 items-center">
             <li className={navLinkClass}>
-              <a href="/">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li className={navLinkClass}>
-              <a href="/man">Man</a>
+              <Link to="/shop">Man</Link>
             </li>
             <li className={navLinkClass}>
-              <a href="/woman">Women</a>
+              <Link to="/woman">Women</Link>
             </li>
             <li className={navLinkClass}>
-              <a href="/kids">Kids</a>
+              <Link to="/kids">Kids</Link>
             </li>
             <li className={navLinkClass}>
-              <a href="#">
+              <Link to="/admin/login">
                 <CiUser size={20} />
-              </a>
+              </Link>
             </li>
             <li className={navLinkClass}>
-              <a href="/cart">
+              <Link to="/cart">
                 <MdOutlineShoppingBag size={20} />
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -104,9 +105,9 @@ const Header = () => {
                 <a href="/kids">Kids</a>
               </li>
               <li className={navLinkClass}>
-                <a href="#">
+                <Link to="/admin/login">
                   <CiUser size={20} />
-                </a>
+                </Link>
               </li>
               <li className={navLinkClass}>
                 <a href="#">
