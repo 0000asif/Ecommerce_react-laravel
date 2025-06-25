@@ -2,9 +2,14 @@ import { apiURL } from '../common/https';
 import Layout from './../common/Layout';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AdminAuthContext } from '../context/AdminAuth';
 
-const Login = () => {
+c
+        headers: {
+          'Content-Type': 'application/json',
+        },onst Login = () => {
   const {
     register,
     handleSubmit,
@@ -12,42 +17,14 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const { login } = useContext(AdminAuthContext);
+
   const navigate = useNavigate();
-
-  // const onSubmit = async data => {
-  //   console.log(data);
-
-  //   const res = await fetch(`${apiURL}/admin/login`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(data),
-  //   });
-
-  //   const result = await res.json();
-  //   console.log(result);
-
-  //   if (result.status === 200) {
-  //     const adminInfo = {
-  //       token: result.token,
-  //       id: result.id,
-  //       name: result.name,
-  //     };
-  //     localStorage.setItem('adminInfo', JSON.stringify(adminInfo));
-  //     navigate('/admin/dashboard');
-  //   } else {
-  //     toast.error(result.message);
-  //   }
-  // };
 
   const onSubmit = async data => {
     try {
       const res = await fetch(`${apiURL}/admin/login`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       });
 
@@ -60,6 +37,7 @@ const Login = () => {
           name: result.name,
         };
         localStorage.setItem('adminInfo', JSON.stringify(adminInfo));
+        login(adminInfo);
         navigate('/admin/dashboard');
       } else {
         toast.error(result.message || 'Login failed');
@@ -193,12 +171,12 @@ const Login = () => {
 
               <p className="mt-10 text-center text-sm/6 text-gray-500">
                 Not a member?{' '}
-                <a
-                  href="/admin/register"
+                <Link
+                  to="/admin/register"
                   className="font-semibold text-indigo-600 hover:text-indigo-500"
                 >
                   Register Now
-                </a>
+                </Link>
               </p>
             </div>
           </div>

@@ -1,4 +1,4 @@
-mport { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
 export const AdminAuthContext = createContext();
 
@@ -18,7 +18,7 @@ export const AdminAuthProvider = ({ children }) => {
 
   return (
     <AdminAuthContext.Provider value={{ user, login, logout }}>
-      {children};
+      {children}
+    </AdminAuthContext.Provider>
+  );
 };
-
-export default Header;

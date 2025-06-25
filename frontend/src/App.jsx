@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.css';
 import Home from './components/Home';
 import Shop from './components/Shop';
@@ -10,6 +9,7 @@ import Checkout from './components/Checkout';
 import Register from './components/admin/Register';
 import { ToastContainer } from 'react-toastify';
 import Dashboard from './components/admin/Dashboard';
+import { AdminRequireAuth } from './components/admin/AdminRequireAuth';
 
 function App() {
   return (
@@ -24,7 +24,14 @@ function App() {
 
           <Route path="/admin/login" element={<Login />} />
           <Route path="/admin/register" element={<Register />} />
-          <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <AdminRequireAuth>
+                <Dashboard />
+              </AdminRequireAuth>
+            }
+          />
         </Routes>
       </BrowserRouter>
       <ToastContainer />

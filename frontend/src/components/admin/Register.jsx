@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Layout from './../common/Layout';
 
 const Register = () => {
@@ -106,12 +107,12 @@ const Register = () => {
 
               <p className="mt-10 text-center text-sm/6 text-gray-500">
                 Already a member?{' '}
-                <a
-                  href="/admin/login"
+                <Link
+                  to="/admin/login"
                   className="font-semibold text-indigo-600 hover:text-indigo-500"
                 >
                   Login
-                </a>
+                </Link>
               </p>
             </div>
           </div>
