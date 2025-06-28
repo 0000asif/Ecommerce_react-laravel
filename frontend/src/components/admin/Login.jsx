@@ -6,10 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AdminAuthContext } from '../context/AdminAuth';
 
-c
-        headers: {
-          'Content-Type': 'application/json',
-        },onst Login = () => {
+const Login = () => {
   const {
     register,
     handleSubmit,
@@ -25,6 +22,9 @@ c
     try {
       const res = await fetch(`${apiURL}/admin/login`, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(data),
       });
 
@@ -111,17 +111,11 @@ c
                   <div className="mt-2">
                     <input
                       id="email"
-                      name="email"
                       type="email"
-                      {...register('email', {
-                        required: 'The Email Feild is Required',
-                      })}
+                      {...register('email', { required: true })}
                       autoComplete="email"
-                      className="block w-full rounded-md border bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                      className="block w-full border rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                     />
-                    {errors.email && (
-                      <p className="text-red-500">{errors.email.message}</p>
-                    )}
                   </div>
                 </div>
 
@@ -129,14 +123,14 @@ c
                   <div className="flex items-center justify-between">
                     <label
                       htmlFor="password"
-                      className="block text-sm/6 font-medium text-gray-900"
+                      className="block text-sm/6 font-medium text-gray-900 "
                     >
                       Password
                     </label>
                     <div className="text-sm">
                       <a
                         href="#"
-                        className="font-semibold  text-indigo-600 hover:text-indigo-500"
+                        className="font-semibold text-indigo-600 hover:text-indigo-500"
                       >
                         Forgot password?
                       </a>
@@ -145,17 +139,11 @@ c
                   <div className="mt-2">
                     <input
                       id="password"
-                      name="password"
                       type="password"
-                      {...register('password', {
-                        required: 'The Password Feild is Required',
-                      })}
+                      {...register('password', { required: true })}
                       autoComplete="current-password"
-                      className="block border w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                      className="border block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                     />
-                    {errors.password && (
-                      <p className="text-red-500">{errors.password.message}</p>
-                    )}
                   </div>
                 </div>
 
@@ -170,12 +158,12 @@ c
               </form>
 
               <p className="mt-10 text-center text-sm/6 text-gray-500">
-                Not a member?{' '}
+                Not Register?{' '}
                 <Link
-                  to="/admin/register"
+                  to={'/admin/register'}
                   className="font-semibold text-indigo-600 hover:text-indigo-500"
                 >
-                  Register Now
+                  Register Here
                 </Link>
               </p>
             </div>
