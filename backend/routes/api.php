@@ -14,4 +14,5 @@ Route::get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->prefix('dashboard')->group(function () {
     Route::get('/category', [CategoryController::class, 'index']);
     Route::post('/category/store', [CategoryController::class, 'store']);
+    Route::put('/category/update/{id}', [CategoryController::class, 'update']);
 });

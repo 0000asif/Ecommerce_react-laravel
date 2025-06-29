@@ -80,10 +80,35 @@ class CategoryController extends Controller
         $exisingcategory = Category::where('slug', $slug)
             ->where('id', '!=', $category->id)
             ->exists();
+        if ($exisingcategory) {
+            $rand = rand(000000, 999999);
+            $slug = $slug . '-' . $rand;
+        }
 
         $category->name = $request->name;
         $category->slug = $slug;
         $category->status = $request->status;
         $category->save();
+
+        return response()->json([
+            'status' => '200',
+            'message' => 'Category updated successfully.'
+        ], 200);
+    }
+
+    function destroy(Request $request, $id)
+    {
+        $category = Category::find($id);
+        if (!$category) {
+            return response()->json([
+                'status' => '404',
+                'message' => 'Category not found.'
+            ], 404);
+        }
+        $category->delete();
+        return response()->json([
+            'status' => '200',
+            'message' => 'Category deleted successfully.'
+        ]);
     }
 }
