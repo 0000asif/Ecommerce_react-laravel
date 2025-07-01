@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\BrandController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +16,6 @@ Route::middleware('auth:sanctum')->prefix('dashboard')->group(function () {
     Route::get('/category', [CategoryController::class, 'index']);
     Route::post('/category/store', [CategoryController::class, 'store']);
     Route::put('/category/update/{id}', [CategoryController::class, 'update']);
+
+    Route::resource('brand', BrandController::class);
 });
