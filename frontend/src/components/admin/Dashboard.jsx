@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import Layout from './../common/Layout';
 import { AdminAuthContext } from '../context/AdminAuth';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const { logout } = useContext(AdminAuthContext);
@@ -13,36 +14,30 @@ const Dashboard = () => {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
             <div className="md:col-span-4 bg-blue-100 p-4">
               <div className="shadow-lg p-6">
-                <h3 className="text-xl font-bold pb-2">Categories</h3>
-
                 <ul className="space-y-2">
                   <li>
-                    <input type="checkbox" /> {'Men'}
+                    <Link to={'/admin/category'}>Categories</Link>
                   </li>
                   <li>
-                    <input type="checkbox" /> {'Woman'}
+                    <Link to={'/admin/brand'}>Brands</Link>
                   </li>
                   <li>
-                    <input type="checkbox" /> {'Kids'}
-                  </li>
-                </ul>
-              </div>
-
-              <div className="shadow-lg p-6">
-                <h3 className="text-xl font-bold pb-2">Brands</h3>
-
-                <ul className="space-y-2">
-                  <li>
-                    <input type="checkbox" /> {'Puma'}
+                    <Link to={'brand'}>Brands</Link>
                   </li>
                   <li>
-                    <input type="checkbox" /> {'Apex'}
+                    <Link to={'brand'}>Brands</Link>
                   </li>
                   <li>
-                    <input type="checkbox" /> {'Bata'}
+                    <Link to={'brand'}>Brands</Link>
                   </li>
                   <li>
-                    <input type="checkbox" /> {'Levis'}
+                    <Link to={'brand'}>Brands</Link>
+                  </li>
+                  <li>
+                    <Link to={'brand'}>Brands</Link>
+                  </li>
+                  <li>
+                    <Link to={'brand'}>Brands</Link>
                   </li>
                 </ul>
               </div>
